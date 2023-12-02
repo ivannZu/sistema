@@ -1,0 +1,97 @@
+/* UploadCard.css */
+.menu-col {
+    background-color: #f2f2f2; /* Cambia el color de fondo según tu preferencia */
+    padding: 16px; /* Añade espaciado interno */
+  }
+  
+  .list-col {
+    padding: 16px; /* Añade espaciado interno */
+  }
+  
+  .custom-list-container {
+    max-height: 400px; /* Establece la altura máxima que prefieras */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+  }
+  
+  .list-container {
+    max-height: 400px; /* Establece la altura máxima que prefieras */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+  }
+
+  /* Add your custom styles */
+.upload-box {
+  margin-bottom: 16px;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 16px;
+  border: 2px dashed #1890ff; /* Border color for the dashed upload area */
+  background-color: #f5f5f5; /* Background color for the upload area */
+  cursor: pointer;
+}
+
+.ant-upload-title {
+  margin-top: 8px;
+  color: #1890ff; /* Text color for the title */
+  font-weight: bold;
+}
+
+  
+.upload-box.uploaded {
+  border-color: #52c41a; /* Green border color for uploaded state */
+  background-color: #f6ffed; /* Light green background color for uploaded state */
+}
+
+  
+/* Estilos generales */
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.custom-menu {
+  background-color: #f0f2f5; /* Color de fondo del menú */
+}
+
+.menu-text {
+  font-size: 16px;
+}
+
+.upload-row {
+  margin-top: 16px;
+}
+
+.upload-box {
+  margin-bottom: 16px;
+}
+
+.uploaded-file-box {
+  padding: 16px;
+  border: 1px solid #ddd; /* Borde para el cuadro de archivo cargado */
+  background-color: #fff; /* Fondo para el cuadro de archivo cargado */
+}
+
+/* Estilos para la paginación */
+.list-col {
+  margin-top: 29px;
+}
+
+/* Estilos para el visor de archivos */
+.ant-modal-body {
+  padding: 0;
+}
+
+/* Estilos para el visor de archivos PDF */
+.embed-responsive {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+

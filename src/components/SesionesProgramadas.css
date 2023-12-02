@@ -1,0 +1,48 @@
+/* SesionesProgramadas.css */
+
+/* Container styles */
+.container {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 40px;
+  }
+  
+  /* Tabs styles */
+  .tabsContainer {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Content box styles */
+  .contentBox {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Scheduling form styles */
+  .schedulingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  
+    button {
+      margin-top: 10px;
+    }
+  }
+  
+  /* Scheduled session info styles */
+  .scheduledSessionInfo {
+    margin-top: 20px;
+  
+    div {
+      margin-bottom: 10px;
+    }
+  }
+  

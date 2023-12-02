@@ -1,0 +1,63 @@
+/* 
+PALETA DE COLORES
+
+#F1CDD3 rosa Propuesto
+
+
+#701e45Morado Oficial
+#701e45Morado Propuesto
+
+#7c858c Gris Oficial
+#7c858c Gris Propuesto
+
+#F1CDD3 Rosa Propuesto
+
+*/
+
+body {
+    font-family: 'Gibson', sans-serif; /* Aplicar la fuente Gibson a todo el cuerpo de la página */
+  }
+  
+  .icono-blanco {
+    color: white;
+  }
+  /* Agrega una regla de animación para la clase confirmed-icon */
+.confirmed-icon {
+  transform: scale(1);
+  transition: transform 0.3s;
+}
+
+/* Agrega una regla de animación para la clase confirmed-icon-visible */
+.confirmed-icon-visible {
+  transform: scale(1.2); /* Escala el icono a un 120% cuando está visible */
+}
+  
+  @font-face {
+    font-family: 'Gibson';
+    src: url('./assets/fonts/Gibson/Gibson.woff2') format('woff2'); /* Ajusta la ruta a tu archivo local */
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Gibson';
+    src: url('./assets/fonts/Gibson/Gibson-Bold.woff2') format('woff2'); /* Ajusta la ruta a tu archivo local */
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Gibson';
+    src: url('./assets/fonts/Gibson/Gibson-Italic.woff2') format('woff2'); /* Ajusta la ruta a tu archivo local */
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Gibson';
+    src: url('./assets/fonts/Gibson/Gibson-BoldItalic.woff2') format('woff2'); /* Ajusta la ruta a tu archivo local */
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  
