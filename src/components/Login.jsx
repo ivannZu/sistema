@@ -9,8 +9,10 @@ const Login = ({ onLogin }) => {
     // Define un objeto con pares de usuario y contraseña
     const validCredentials = {
         "admin": "admin",
-        "ivan": "12345",
-        "eder": "123456"
+        "ivanZu": "12345",
+        "eder palomino": "123456",
+        "guadalupe palacios": "1234567"
+        
         // Agrega más usuarios según sea necesario
     };
 
