@@ -161,11 +161,7 @@ const UploadCard = () => {
         </Col>
       </Row>
       <Modal
-        visible={!!previewFile}
-        title="File Preview"
-        onCancel={() => setPreviewFile(null)}
-        footer={null}
-        destroyOnClose
+   
       >
         {previewFile && (
           <embed src={previewFile.url} type="application/pdf" width="100%" height="500px" />

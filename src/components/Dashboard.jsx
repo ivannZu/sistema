@@ -31,7 +31,7 @@ const menuItems = [
   { path: "/indicadores", text: "Indicadores" },
   { path: "/repositorio", text: "Repositorio" },
   { path: "/buzon-de-reportes", text: "Buzón de Reportes" },
-  { path: "/login", text: "Opciones" },
+ 
 ];
 
 function Dashboard() {

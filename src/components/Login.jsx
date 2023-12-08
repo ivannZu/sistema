@@ -6,24 +6,28 @@ const Login = ({ onLogin }) => {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    // Implementa la lógica de inicio de sesión real aquí
-    // Por simplicidad, consideremos un nombre de usuario y contraseña codificados
-    const validUsername = "admin";
-    const validPassword = "admin";
+    // Define un objeto con pares de usuario y contraseña
+    const validCredentials = {
+        "admin": "admin",
+        "ivan": "12345",
+        "eder": "123456"
+        // Agrega más usuarios según sea necesario
+    };
 
-    if (username === validUsername && password === validPassword) {
-      // Guarda el estado de inicio de sesión en localStorage
+    // Verifica si las credenciales proporcionadas existen en el objeto validCredentials
+   
+
+    if (validCredentials[username] && validCredentials[username] === password) {
+      // Guarda el estado de inicio de sesión y el nombre del usuario en localStorage
       localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("loggedInUser", username);
 
       // Llama al callback onLogin para indicar un inicio de sesión exitoso
       onLogin();
-    } else {
-      // Maneja el intento de inicio de sesión inválido
+  } else {
       alert("Credenciales inválidas. Por favor, inténtalo de nuevo.");
-    }
-  };
-
-
+  }
+};
 
 
 

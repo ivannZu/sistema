@@ -22,11 +22,16 @@ import DoneIcon from "@mui/icons-material/Done";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const Entidad = () => {
+
+
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const loggedInUser = localStorage.getItem("loggedInUser");
   const [organismo, setOrganismo] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -51,11 +56,16 @@ const Entidad = () => {
     }
   };
 
+  
+
   return (
     <Grid container spacing={3} justifyContent="center" className="grid-container">
       <Grid item xs={12}>
+      
         <Typography variant="h4" align="center">
-          Bienvenido usuario
+        {isLoggedIn && (
+                <h1>Bienvenido, {loggedInUser}!</h1>
+            )}
         </Typography>
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -90,7 +100,7 @@ const Entidad = () => {
         
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Tooltip title="documentos">
+        <Tooltip title="">
         <Button
   style={{
     backgroundColor: "#6A0F49",
@@ -127,6 +137,7 @@ const Entidad = () => {
             onClick={() => {
               setSelectedDocuments([]);
               setOpenDialog(false);
+              window.open('https://docs.google.com/document/d/1HX5_3qbCmMZdB6rEy2FNJFAXTqjScZe3MaQ2B4C19fs/edit', '_blank');
             }}
           >
             Acta de reunion
@@ -147,13 +158,7 @@ const Entidad = () => {
               height: "70px",
             }}
             fullWidth
-            onClick={() => {
-              if (organismo && selectedDocuments.length > 0) {
-                setOpenDialog(true);
-              } else {
-                toast.error("Por favor, seleccione un organismo y al menos un documento antes de firmar.");
-              }
-            }}
+          
           >
             Firmar Documentos
           </Button>

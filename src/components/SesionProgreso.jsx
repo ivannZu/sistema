@@ -1,59 +1,18 @@
 import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import './SesionesProgramadas.css';
-import SesionProgreso from './SesionProgreso'; 
-const ProgramarSesion = ({ onSchedule, onClear, isSessionScheduled }) => {
-  const [sessionDetails, setSessionDetails] = React.useState({
-    title: '',
-    date: '',
-    startTime: '', // Nueva propiedad para la hora de inicio
-  });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setSessionDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
-    }));
-  };
-
-  const handleSchedule = () => {
-    if (!isSessionScheduled) {
-      // Lógica simple para generar el enlace de Google Meet
-      const googleMeetLink = `https://meet.google.com/${Math.random().toString(36).substring(2, 10)}`;
-
-      // Establecer la sesión programada y el enlace
-      setSessionDetails({ ...sessionDetails, googleMeetLink });
-      onSchedule({ ...sessionDetails, googleMeetLink });
-
-      // Guardar en local storage
-      localStorage.setItem('scheduledSession', JSON.stringify({ ...sessionDetails, googleMeetLink }));
-
-      // Abrir el enlace de Google Meet en una nueva pestaña
-      window.open(googleMeetLink, '_blank');
-    }
-  };
-
-  const handleClear = () => {
-    // Limpiar la sesión programada
-    setSessionDetails({
-      title: '',
-      date: '',
-      startTime: '',
-    });
-    onClear();
-
-    // Eliminar del local storage
-    localStorage.removeItem('scheduledSession');
-  };
-
+const ProgramarSesion = ({ onSchedule, onClear, isSessionScheduled, sessionDetails, handleInputChange }) => {
   return (
     <div className="schedulingForm">
-      
+      {/* Aquí agregarías los inputs para el título, fecha y hora de inicio, y los botones para programar/limpiar la sesión */}
+      {/* Ejemplo de input: */}
+      {/* <input type="text" name="title" value={sessionDetails.title} onChange={handleInputChange} /> */}
+      {/* Asegúrate de agregar inputs similares para date y startTime */}
+      {/* Botones para programar y limpiar */}
+      {/* <button onClick={onSchedule}>Programar</button> */}
+      {/* <button onClick={onClear}>Limpiar</button> */}
     </div>
   );
 };
@@ -66,33 +25,73 @@ const SesionesProgramadasInfo = ({ scheduledSession }) => (
         <Typography variant="body1">Título: {scheduledSession.title}</Typography>
         <Typography variant="body1">Fecha: {scheduledSession.date}</Typography>
         <Typography variant="body1">Hora de inicio: {scheduledSession.startTime}</Typography>
-        <Typography variant="body1">Enlace Google Meet: {scheduledSession.googleMeetLink}</Typography>
       </>
     )}
   </div>
 );
 
 export default function SesionesProgramadas() {
-  const [value, setValue] = React.useState(0);
   const [scheduledSession, setScheduledSession] = React.useState(
     JSON.parse(localStorage.getItem('scheduledSession')) || null
   );
+  const [sessionDetails, setSessionDetails] = React.useState({
+    title: '',
+    date: '',
+    startTime: '',
+  });
+  const [uploadedFiles, setUploadedFiles] = React.useState([]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  React.useEffect(() => {
+    if (scheduledSession) {
+      const storedFiles = JSON.parse(localStorage.getItem('uploadedFiles'));
+      if (storedFiles) {
+        setUploadedFiles(storedFiles);
+      }
+    } else {
+      setUploadedFiles([]);
+    }
+  }, [scheduledSession]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSessionDetails(prevDetails => ({
+      ...prevDetails,
+      [name]: value,
+    }));
   };
 
-  const handleSchedule = (sessionDetails) => {
+  const handleSchedule = () => {
     setScheduledSession(sessionDetails);
+    localStorage.setItem('scheduledSession', JSON.stringify(sessionDetails));
+    setUploadedFiles([]);
+    localStorage.removeItem('uploadedFiles');
   };
 
   const handleClear = () => {
     setScheduledSession(null);
+    setUploadedFiles([]);
     localStorage.removeItem('scheduledSession');
+    localStorage.removeItem('uploadedFiles');
+  };
+
+  const handleFileUpload = (event) => {
+    const files = event.target.files;
+    if (files.length) {
+      const newFileNames = Array.from(files).map(file => file.name);
+      const updatedFiles = [...uploadedFiles, ...newFileNames];
+      setUploadedFiles(updatedFiles);
+      localStorage.setItem('uploadedFiles', JSON.stringify(updatedFiles));
+    }
   };
 
   const isSessionScheduled = Boolean(scheduledSession);
 
+
+
+  const handleDeleteFiles = () => {
+    setUploadedFiles([]);
+    localStorage.removeItem('uploadedFiles');
+  };
   return (
     <Box sx={{ maxWidth: 900, margin: 'auto', mt: 4 }}>
       <Box sx={{ p: 3, border: '1px solid #ddd', borderRadius: '4px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
@@ -103,22 +102,57 @@ export default function SesionesProgramadas() {
           onSchedule={handleSchedule}
           onClear={handleClear}
           isSessionScheduled={isSessionScheduled}
+          sessionDetails={sessionDetails}
+          handleInputChange={handleInputChange}
         />
         {isSessionScheduled && (
           <>
-            <Typography variant="h6" mt={4}>
-              Sesión Programada
-            </Typography>
             <SesionesProgramadasInfo scheduledSession={scheduledSession} />
+            
+            <input
+              type="file"
+              multiple
+              onChange={handleFileUpload}
+              style={{
+                marginTop: '10px',
+                backgroundColor: '#6A0F49', // Cambia el color de fondo según tus preferencias
+                color: 'white', // Cambia el color del texto según tus preferencias
+                padding: '10px 20px', // Ajusta el espaciado interno del botón
+                borderRadius: '5px', // Agrega bordes redondeados para un aspecto más agradable
+                border: 'none', // Elimina el borde
+                cursor: 'pointer', // Cambia el cursor al pasar sobre el botón
+              }}
+            />
+
+            {uploadedFiles.length > 0 && (
+              <div style={{ marginTop: '20px' }}>
+                <Typography variant="h6">Archivos Subidos:</Typography>
+                <ul>
+                  {uploadedFiles.map((fileName, index) => (
+                    <li key={index}>{fileName}</li>
+                  ))}
+                </ul>
+                {/* Botón para borrar los archivos subidos */}
+                <button
+  onClick={handleDeleteFiles}
+  style={{
+    marginTop: '10px',
+    backgroundColor: '#6A0F49', // Cambia el color de fondo según tus preferencias
+    color: 'white', // Cambia el color del texto según tus preferencias
+    padding: '10px 20px', // Ajusta el espaciado interno del botón
+    borderRadius: '5px', // Agrega bordes redondeados para un aspecto más agradable
+    border: 'none', // Elimina el borde
+    cursor: 'pointer', // Cambia el cursor al pasar sobre el botón
+  }}
+>
+  Subir archivos
+</button>
+
+              </div>
+            )}
           </>
         )}
-
-        
       </Box>
-
-
-
-      
     </Box>
   );
 }

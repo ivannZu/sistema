@@ -84,18 +84,20 @@ const Header = ({ onLogout }) => {
         <img src={logo} alt="Escudo del Estado de Michoacán" style={logoStyle} />
       </div>
       <div style={textContainerStyle}>
-        <h1>My App</h1>
+        
         <p style={titleStyle}>
           {/* Add your title content here */}
         </p>
       </div>
-      <nav>
-        <ul style={navigationStyle}>
-          <li style={listItemStyle}>Inicio</li>
-          <li style={listItemStyle}>Servicios</li>
-          <li style={listItemStyle}>Contacto</li>
+       <nav>
+       <ul style={navigationStyle}>
+         <li style={listItemStyle}></li>
+          
+          <li style={listItemStyle}></li>
         </ul>
       </nav>
+
+
       <button onClick={onLogout} style={logoutButtonStyle}>Cerrar sesión</button>
     </header>
   );

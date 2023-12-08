@@ -83,8 +83,8 @@ const ProgramarSesion = ({ onSchedule, onClear, isSessionScheduled }) => {
         Programar Sesión
       </Button>
       {isSessionScheduled && (
-        <Button variant="contained" color="secondary" onClick={handleClear}>
-          Borrar Sesión
+        <Button variant="contained" background-color= "#6A0F49" onClick={handleClear}>
+          Celebrar sesion
         </Button>
       )}
     </div>
